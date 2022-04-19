@@ -1,10 +1,17 @@
 require 'rails_helper'
+require 'factory_bot_rails'
 
 RSpec.feature "Projects", type: :feature do
-  context "Create new project" do
+  context "Create Project" do
     before(:each) do
       visit new_project_path
+      user = FactoryBot.create(:user, email: "123@email.com", password: "123@XYZ")
       within("form") do
+        fill_in "Email", with: user.email
+        fill_in "Password", with: user.password
+        click_button "Log in"
+      end
+      within("form") do 
         fill_in "Title", with: "Test title"
       end
     end
@@ -25,18 +32,24 @@ RSpec.feature "Projects", type: :feature do
     let(:project) { Project.create(title: "Test title", description: "Test content") }
     before(:each) do
       visit edit_project_path(project)
+      user = FactoryBot.create(:user, email: "123@email.com", password: "123@XYZ")
+      within("form") do
+        fill_in "Email", with: user.email
+        fill_in "Password", with: user.password
+        click_button "Log in"
+      end 
     end
 
     scenario "should be successful" do
-      within("form") do
-        fill_in "Description", with: "New description content"
+      within("form")do
+        fill_in "Description", with: "new description content"
       end
       click_button "Update Project"
       expect(page).to have_content("Project was successfully updated")
     end
 
-    scenario "should fail" do
-      within("form") do
+    scenario "should fail" do 
+      within("form") do 
         fill_in "Description", with: ""
       end
       click_button "Update Project"
@@ -49,8 +62,15 @@ RSpec.feature "Projects", type: :feature do
     scenario "remove project" do
       visit projects_path
       click_link "Destroy"
-      expect(page).to have_content("Project was successfully destroyed")
-      expect(Project.count).to eq(0)
+      user = FactoryBot.create(:user, email: "123@email.com", password: "123@YXZ")
+      within("form")do
+        fill_in "Email", with: user.email
+        fill_in "Password", with: user.password
+        click_button "Log in"
+    end
+    click_link "Destroy"
+    expect(page).to have_content("Project was successfully destroyed")
+    expect(Project.count).to eq(0)
     end
   end
 end

@@ -1,15 +1,58 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CS3300</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+  <title>Cs3300</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body>    
+    <nav class="navbar navbar-expand-md navbar-blue fixed-top bg-dark">
+      <a class="navbar-brand" href="#">CS3300</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/projects">Home <span class="sr-only">(current)</span></a>
+          </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="http://example.com/" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" href="/users/sign_in">Sign In</a>
+            <a class="dropdown-item" href="/users/sign_up">Sign Up</a>
+            <% if user_signed_in?%>
+            <%=link_to "Logout", destroy_user_session_path,:method => :delete %>
+            <% end %>
+          </div>
+        </li>
+        </ul>
+      </div>
+    </nav>
+
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <center><h1 class="display-1">Mike Jankowiak Portfolio</h1><center>
+      <center><p>Hello, my name is Mike Jankowiak and this is my Portfolio for CS3300 at the University of Colorado Colorado Springs. On this webpage, users will be able to create projects, edit their projects, and delete projects that they have created.</p><center>
+    </div>
+  </div>
+
+  </main>
+  <%= yield %>
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write'<script src="../../assets/js/vendor/jquery-slim.min.js"></script></script>
+  <script src="../../assets/js/vendor/popper.min.js"></script>
+  <script src="../../dist/js/bootstrap.min.js"></script>
   </body>
 </html>

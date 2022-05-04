@@ -7,10 +7,16 @@ body {
   line-height: 18px;
 }
 
-p, ol, ul, td {
+ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+}
+
+p {
+  font-family: Times New Roman, Times, serif;
+  font-size: 20px;
+  line-height: 20px
 }
 
 pre {
@@ -42,6 +48,7 @@ td {
 
 div {
   &.field, &.actions {
+    margin-top: 10px;
     margin-bottom: 10px;
   }
 }
